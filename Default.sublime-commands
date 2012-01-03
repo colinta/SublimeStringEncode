@@ -1,0 +1,18 @@
+[
+    {
+        "caption": "StringEncode: HTML Entitize",
+        "command": "html_entitize"
+    },
+    {
+        "caption": "StringEncode: HTML Deentitize",
+        "command": "html_deentitize"
+    },
+    {
+        "caption": "StringEncode: URL Encode",
+        "command": "url_encode"
+    },
+    {
+        "caption": "StringEncode: URL Decode",
+        "command": "url_decode"
+    }
+]
