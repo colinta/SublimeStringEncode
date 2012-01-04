@@ -7,7 +7,8 @@ import urllib
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit):
         e = self.view.begin_edit('encode')
-        for region in self.view.sel():
+        regions = [region for region in self.view.sel()]
+        for region in regions:
             if region.empty():
                 continue
             text = self.view.substr(region)
