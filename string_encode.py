@@ -46,7 +46,7 @@ class HtmlDeentitizeCommand(StringEncode):
         return text
 
 
-class UrlHtmlEscape(StringEncode):
+class UrlEncodeCommand(StringEncode):
     def encode(self, text):
         return urllib.quote(text)
 
