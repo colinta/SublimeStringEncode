@@ -14,5 +14,13 @@
     {
         "caption": "StringEncode: URL Decode",
         "command": "url_decode"
+    },
+    {
+        "caption": "StringEncode: Escape regex",
+        "command": "escape_regex"
+    },
+    {
+        "caption": "StringEncode: Escape LIKE",
+        "command": "escape_like"
     }
 ]

@@ -2,6 +2,7 @@
 
 import sublime_plugin
 import urllib
+import re
 
 
 class StringEncode(sublime_plugin.TextCommand):
@@ -75,3 +76,19 @@ class UrlEncodeCommand(StringEncode):
 class UrlDecodeCommand(StringEncode):
     def encode(self, text):
         return urllib.unquote(text)
+
+
+class Escaper(StringEncode):
+    def encode(self, text):
+        print self.meta
+        return re.sub(r'(?<!\\)(%s)' % self.meta, r'\\\1', text).replace("\t", r"\t")
+
+
+class EscapeRegexCommand(Escaper):
+    meta = r'[\\*.+^$()\[\]]'
+
+
+class EscapeLikeCommand(Escaper):
+    meta = r'[%_]'
+
+# test of regex {} escape \*\.\+\^\$\(\)\[\]
