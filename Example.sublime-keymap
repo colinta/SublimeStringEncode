@@ -1,0 +1,9 @@
+[
+    { "keys": ["super+shift+7"], "command": "xml_entitize", "scope": "text.xml" },
+    { "keys": ["super+ctrl+7"], "command": "xml_deentitize", "scope": "text.xml" },
+    { "keys": ["super+shift+7"], "command": "html_entitize" },
+    { "keys": ["super+ctrl+7"], "command": "html_deentitize" },
+    { "keys": ["super+shift+5"], "command": "url_encode" },
+    { "keys": ["super+ctrl+5"], "command": "url_decode" },
+    { "keys": ["ctrl+shift+r"], "command": "escape_regex" }
+]
