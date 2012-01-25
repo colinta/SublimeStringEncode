@@ -1,6 +1,0 @@
-[
-    { "keys": ["super+shift+7"], "command": "html_entitize" },
-    { "keys": ["super+ctrl+7"], "command": "html_deentitize" },
-    { "keys": ["super+shift+5"], "command": "url_encode" },
-    { "keys": ["super+ctrl+5"], "command": "url_decode" }
-]
