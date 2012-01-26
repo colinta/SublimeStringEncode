@@ -1,0 +1,7 @@
+{
+  "repo": "SublimeStringEncode",
+  "name": "StringEncode",
+  "description": "Converts characters from one encoding to another using a transformation (think HTML entities, not character encodings).",
+  "author": "Colin Thomas-Arnold (colinta)",
+  "homepage": "https://github.com/colinta/SublimeStringEncode"
+}
