@@ -80,7 +80,6 @@ class UrlDecodeCommand(StringEncode):
 
 class Escaper(StringEncode):
     def encode(self, text):
-        print self.meta
         return re.sub(r'(?<!\\)(%s)' % self.meta, r'\\\1', text).replace("\t", r"\t")
 
 
