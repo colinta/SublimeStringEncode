@@ -80,14 +80,12 @@ class UrlDecodeCommand(StringEncode):
 
 class Escaper(StringEncode):
     def encode(self, text):
-        return re.sub(r'(?<!\\)(%s)' % self.meta, r'\\\1', text).replace("\t", r"\t")
+        return re.sub(r'(?<!\\)(%s)' % self.meta, r'\\\1', text)
 
 
 class EscapeRegexCommand(Escaper):
-    meta = r'[\\*.+^$()\[\]]'
+    meta = r'[\\*.+^$()\[\]\{\}]'
 
 
 class EscapeLikeCommand(Escaper):
     meta = r'[%_]'
-
-# test of regex {} escape \*\.\+\^\$\(\)\[\]
