@@ -16,6 +16,14 @@
         "command": "url_decode"
     },
     {
+        "caption": "StringEncode: Base64 Encode",
+        "command": "base64_encode"
+    },
+    {
+        "caption": "StringEncode: Base64 Decode",
+        "command": "base64_decode"
+    },
+    {
         "caption": "StringEncode: Escape regex",
         "command": "escape_regex"
     },

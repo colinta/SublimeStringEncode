@@ -2,6 +2,7 @@
 
 import sublime_plugin
 import urllib
+import base64
 import re
 
 
@@ -76,6 +77,16 @@ class UrlEncodeCommand(StringEncode):
 class UrlDecodeCommand(StringEncode):
     def encode(self, text):
         return urllib.unquote(text)
+
+
+class Base64EncodeCommand(StringEncode):
+    def encode(self, text):
+        return base64.b64encode(text)
+
+
+class Base64DecodeCommand(StringEncode):
+    def encode(self, text):
+        return base64.b64decode(text)
 
 
 class Escaper(StringEncode):

@@ -29,6 +29,10 @@ Commands
 
 `url_decode`: Uses urllib.unquote to convert escaped URL characters
 
+`base64_encode`: Uses base64 to encode into base64
+
+`base64_decode`: Uses base64 to decode from base64
+
 `escape_regex`: Escapes regex meta characters
 
 `escape_like`: Escapes SQL-LIKE meta characters
