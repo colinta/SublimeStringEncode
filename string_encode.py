@@ -39,6 +39,9 @@ class HtmlEntitizeCommand(StringEncode):
         for k in html_escape_table:
             v = html_escape_table[k]
             text = text.replace(k, v)
+        for i, c in enumerate(text):
+            if ord(c) > 127:
+                text = text[:i] + hex(ord(c)).replace('0x', '&#x') + ';' + text[i + 1:]
         return text
 
 
@@ -47,6 +50,9 @@ class HtmlDeentitizeCommand(StringEncode):
         for k in html_escape_table:
             v = html_escape_table[k]
             text = text.replace(v, k)
+        while re.search('&#[xX][a-fA-F0-9]+;', text):
+            match = re.search('&#[xX]([a-fA-F0-9]+);', text)
+            text = text.replace(match.group(0), unichr(int('0x' + match.group(1), 16)))
         text = text.replace('&amp;', '&')
         return text
 
