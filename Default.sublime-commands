@@ -30,5 +30,13 @@
     {
         "caption": "StringEncode: Escape LIKE",
         "command": "escape_like"
+    },
+    {
+        "caption": "StringEncode: Decimal to Hexadecimal",
+        "command": "dec_hex"
+    },
+    {
+        "caption": "StringEncode: Hexadecimal to Decimal",
+        "command": "hex_dec"
     }
 ]

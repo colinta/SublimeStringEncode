@@ -106,3 +106,13 @@ class EscapeRegexCommand(Escaper):
 
 class EscapeLikeCommand(Escaper):
     meta = r'[%_]'
+
+
+class HexDecCommand(StringEncode):
+    def encode(self, text):
+        return str(int(text, 16))
+
+
+class DecHexCommand(StringEncode):
+    def encode(self, text):
+        return hex(int(text))

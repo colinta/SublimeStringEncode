@@ -7,5 +7,6 @@
     { "keys": ["super+ctrl+6"], "command": "base64_decode" },
     { "keys": ["super+shift+5"], "command": "url_encode" },
     { "keys": ["super+ctrl+5"], "command": "url_decode" },
-    { "keys": ["ctrl+shift+r"], "command": "escape_regex" }
+    { "keys": ["ctrl+shift+r"], "command": "escape_regex" },
+    { "keys": ["super+ctrl+3"], "command": "hex_dec" }
 ]
