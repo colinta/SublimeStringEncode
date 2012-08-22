@@ -39,10 +39,13 @@ class HtmlEntitizeCommand(StringEncode):
         for k in html_escape_table:
             v = html_escape_table[k]
             text = text.replace(k, v)
+        ret = ''
         for i, c in enumerate(text):
             if ord(c) > 127:
-                text = text[:i] + hex(ord(c)).replace('0x', '&#x') + ';' + text[i + 1:]
-        return text
+                ret += hex(ord(c)).replace('0x', '&#x') + ';'
+            else:
+                ret += c
+        return ret
 
 
 class HtmlDeentitizeCommand(StringEncode):
