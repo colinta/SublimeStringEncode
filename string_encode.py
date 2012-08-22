@@ -57,7 +57,7 @@ class HtmlDeentitizeCommand(StringEncode):
         return text
 
 
-class xmlEntitizeCommand(StringEncode):
+class XmlEntitizeCommand(StringEncode):
     def encode(self, text):
         text = text.replace('&', '&amp;')
         for k in xml_escape_table:
@@ -66,7 +66,7 @@ class xmlEntitizeCommand(StringEncode):
         return text
 
 
-class xmlDeentitizeCommand(StringEncode):
+class XmlDeentitizeCommand(StringEncode):
     def encode(self, text):
         for k in xml_escape_table:
             v = xml_escape_table[k]
