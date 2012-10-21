@@ -31,6 +31,41 @@ html_escape_table = {
 xml_escape_table = {
     u"\"": "&quot;", u"'": "&#039;", u"<": "&lt;", u">": "&gt;"
 }
+french_escape_table = {
+  u"À": "&Agrave;",  # Capital A-grave
+  u"à": "&agrave;",  # Lowercase a-grave
+  u"Â": "&Acirc;", # Capital A-circumflex
+  u"â": "&acirc;", # Lowercase a-circumflex
+  u"Æ": "&AElig;", # Capital AE Ligature
+  u"æ": "&aelig;", # Lowercase AE Ligature
+  u"Ç": "&Ccedil;",  # Capital C-cedilla
+  u"ç": "&ccedil;",  # Lowercase c-cedilla
+  u"È": "&Egrave;",  # Capital E-grave
+  u"è": "&egrave;",  # Lowercase e-grave
+  u"É": "&Eacute;",  # Capital E-acute
+  u"é": "&eacute;",  # Lowercase e-acute
+  u"Ê": "&Ecirc;", # Capital E-circumflex
+  u"ê": "&ecirc;", # Lowercase e-circumflex
+  u"Ë": "&Euml;",  # Capital E-umlaut
+  u"ë": "&euml;",  # Lowercase e-umlaut
+  u"Î": "&Icirc;", # Capital I-circumflex
+  u"î": "&icirc;", # Lowercase i-circumflex
+  u"Ï": "&Iuml;",  # Capital I-umlaut
+  u"ï": "&iuml;",  # Lowercase i-umlaut
+  u"Ô": "&Ocirc;", # Capital O-circumflex
+  u"ô": "&ocirc;", # Lowercase o-circumflex
+  u"Œ": "&OElig;", # Capital OE ligature
+  u"œ": "&oelig;", # Lowercase oe ligature
+  u"Ù": "&Ugrave;",  # Capital U-grave
+  u"ù": "&ugrave;",  # Lowercase u-grave
+  u"Û": "&Ucirc;", # Capital U-circumflex
+  u"û": "&ucirc;", # Lowercase U-circumflex
+  u"Ü": "&Uuml;",  # Capital U-umlaut
+  u"ü": "&uuml;",  # Lowercase U-umlaut
+  u"«": "&laquo;", # Left angle quotes
+  u"»": "&raquo;", # Right angle quotes
+  u"€": "&euro;"  # Euro
+}
 
 
 class HtmlEntitizeCommand(StringEncode):
@@ -58,6 +93,30 @@ class HtmlDeentitizeCommand(StringEncode):
             text = text.replace(match.group(0), unichr(int('0x' + match.group(1), 16)))
         text = text.replace('&amp;', '&')
         return text
+
+
+class FrenchEntitizeCommand(StringEncode):
+  def encode(self, text):
+      for k in french_escape_table:
+          v = french_escape_table[k]
+          text = text.replace(k, v)
+      while re.search('&#[xX][a-fA-F0-9]+;', text):
+          match = re.search('&#[xX]([a-fA-F0-9]+);', text)
+          text = text.replace(match.group(0), unichr(int('0x' + match.group(1), 16)))
+      text = text.replace('&amp;', '&')
+      return text
+
+
+class FrenchDeentitizeCommand(StringEncode):
+  def encode(self, text):
+      for k in french_escape_table:
+          v = french_escape_table[k]
+          text = text.replace(v, k)
+      while re.search('&#[xX][a-fA-F0-9]+;', text):
+          match = re.search('&#[xX]([a-fA-F0-9]+);', text)
+          text = text.replace(match.group(0), unichr(int('0x' + match.group(1), 16)))
+      text = text.replace('&amp;', '&')
+      return text
 
 
 class XmlEntitizeCommand(StringEncode):

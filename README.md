@@ -38,6 +38,9 @@ Commands
 
 `escape_like`: Escapes SQL-LIKE meta characters
 
+`french_entitize`: Converts French characters to their HTML entity
+
+`french_deentitize`: Converts HTML entities to a French character
 
 TODO
 ----

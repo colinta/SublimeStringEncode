@@ -38,5 +38,13 @@
     {
         "caption": "StringEncode: Hexadecimal to Decimal",
         "command": "hex_dec"
+    },
+    {
+        "caption": "StringEncode: French HTML Entitize",
+        "command": "french_entitize"
+    },
+    {
+        "caption": "StringEncode: French HTML Deentitize",
+        "command": "french_deentitize"
     }
 ]
