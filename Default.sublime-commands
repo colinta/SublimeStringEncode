@@ -8,6 +8,14 @@
         "command": "html_deentitize"
     },
     {
+        "caption": "StringEncode: Safe HTML Entitize",
+        "command": "safe_html_entitize"
+    },
+    {
+        "caption": "StringEncode: Safe HTML Deentitize",
+        "command": "safe_html_deentitize"
+    },
+    {
         "caption": "StringEncode: URL Encode",
         "command": "url_encode"
     },
@@ -38,13 +46,5 @@
     {
         "caption": "StringEncode: Hexadecimal to Decimal",
         "command": "hex_dec"
-    },
-    {
-        "caption": "StringEncode: French HTML Entitize",
-        "command": "french_entitize"
-    },
-    {
-        "caption": "StringEncode: French HTML Deentitize",
-        "command": "french_deentitize"
     }
 ]
