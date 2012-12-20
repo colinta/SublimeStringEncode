@@ -24,6 +24,10 @@ Commands
 
 `url_decode`: Uses urllib.unquote to convert escaped URL characters
 
+`json_escape`: Escapes a string and surrounds it in quotes, according to the JSON encoding.
+
+`json_unescape`: Unescapes a string (include the quotes!) according to JSON encoding.
+
 `base64_encode`: Uses base64 to encode into base64
 
 `base64_decode`: Uses base64 to decode from base64

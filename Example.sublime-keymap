@@ -3,6 +3,8 @@
     { "keys": ["super+ctrl+7"], "command": "xml_deentitize", "scope": "text.xml" },
     { "keys": ["super+shift+7"], "command": "html_entitize" },
     { "keys": ["super+ctrl+7"], "command": "html_deentitize" },
+    { "keys": ["super+shift+8"], "command": "json_escape" },
+    { "keys": ["super+ctrl+8"], "command": "json_unescape" },
     { "keys": ["super+shift+6"], "command": "base64_encode" },
     { "keys": ["super+ctrl+6"], "command": "base64_decode" },
     { "keys": ["super+shift+5"], "command": "url_encode" },

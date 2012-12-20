@@ -4,6 +4,7 @@ import sublime_plugin
 import urllib
 import base64
 import re
+import json
 
 
 class StringEncode(sublime_plugin.TextCommand):
@@ -109,6 +110,16 @@ class XmlDeentitizeCommand(StringEncode):
             text = text.replace(v, k)
         text = text.replace('&amp;', '&')
         return text
+
+
+class JsonEscapeCommand(StringEncode):
+    def encode(self, text):
+        return json.dumps(text)
+
+
+class JsonUnescapeCommand(StringEncode):
+    def encode(self, text):
+        return json.loads(text)
 
 
 class UrlEncodeCommand(StringEncode):
