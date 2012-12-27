@@ -16,6 +16,14 @@
         "command": "safe_html_deentitize"
     },
     {
+        "caption": "StringEncode: JSON Escape",
+        "command": "json_escape"
+    },
+    {
+        "caption": "StringEncode: JSON Unescape",
+        "command": "json_unescape"
+    },
+    {
         "caption": "StringEncode: URL Encode",
         "command": "url_encode"
     },
