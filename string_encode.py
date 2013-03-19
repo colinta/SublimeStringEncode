@@ -13,9 +13,9 @@ class StringEncode(sublime_plugin.TextCommand):
         regions = [region for region in self.view.sel()]
 
         # sort by region.end() DESC
-        def compare(region_a, region_b):
-            return cmp(region_b.end(), region_a.end())
-        regions.sort(compare)
+        def get_end(region):
+            return region.end
+        regions.sort(key=get_end)
 
         for region in regions:
             if region.empty():
