@@ -10,14 +10,7 @@ import sublime_plugin
 
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit):
-        regions = [region for region in self.view.sel()]
-
-        # sort by region.end() DESC
-        def compare(region_a, region_b):
-            return cmp(region_b.end(), region_a.end())
-        regions.sort(key=cmp_to_key(compare))
-
-        for region in regions:
+        for region in self.view.sel():
             if region.empty():
                 continue
             text = self.view.substr(region)
