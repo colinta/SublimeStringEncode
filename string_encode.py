@@ -1,21 +1,21 @@
 # coding: utf8
-
-import sublime_plugin
 import urllib
 import base64
 import re
 import json
+from functools import cmp_to_key
+
+import sublime_plugin
 
 
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit):
-        e = self.view.begin_edit('encode')
         regions = [region for region in self.view.sel()]
 
         # sort by region.end() DESC
         def compare(region_a, region_b):
             return cmp(region_b.end(), region_a.end())
-        regions.sort(compare)
+        regions.sort(key=cmp_to_key(compare))
 
         for region in regions:
             if region.empty():
@@ -23,7 +23,6 @@ class StringEncode(sublime_plugin.TextCommand):
             text = self.view.substr(region)
             replacement = self.encode(text)
             self.view.replace(edit, region, replacement)
-        self.view.end_edit(e)
 
 
 html_escape_table = {
