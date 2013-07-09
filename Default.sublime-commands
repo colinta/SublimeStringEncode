@@ -8,6 +8,14 @@
         "command": "html_deentitize"
     },
     {
+        "caption": "StringEncode: XML Entitize",
+        "command": "xml_entitize"
+    },
+    {
+        "caption": "StringEncode: XML Deentitize",
+        "command": "xml_deentitize"
+    },
+    {
         "caption": "StringEncode: Safe HTML Entitize",
         "command": "safe_html_entitize"
     },
