@@ -62,5 +62,13 @@
     {
         "caption": "StringEncode: Hexadecimal to Decimal",
         "command": "hex_dec"
+    },
+    {
+        "caption": "StringEncode: Unicode to Hexadecimal",
+        "command": "unicode_hex"
+    },
+    {
+        "caption": "StringEncode: Hexadecimal to Unicode",
+        "command": "hex_unicode"
     }
 ]
