@@ -1,7 +1,17 @@
 {
-  "repo": "SublimeStringEncode",
   "name": "StringEncode",
   "description": "Converts characters from one encoding to another using a transformation (think HTML entities, not character encodings).",
   "author": "Colin T.A. Gray (colinta)",
-  "homepage": "https://github.com/colinta/SublimeStringEncode"
+  "details": "https://github.com/colinta/SublimeStringEncode",
+  "labels": ["text manipulation"],
+  "releases": [
+    {
+      "details": "https://github.com/colinta/SublimeStringEncode/tree/master",
+      "sublime_text": "<3000"
+    },
+    {
+      "details": "https://github.com/colinta/SublimeStringEncode/tags",
+      "sublime_text": ">=3000"
+    }
+  ]
 }
