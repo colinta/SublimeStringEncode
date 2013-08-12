@@ -1,29 +1,23 @@
 # coding: utf8
-
-import sublime_plugin
 import urllib
 import base64
 import re
 import json
+from functools import cmp_to_key
 
+import sublime_plugin
+
+import re
+import sys
 
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit):
-        e = self.view.begin_edit('encode')
-        regions = [region for region in self.view.sel()]
-
-        # sort by region.end() DESC
-        def get_end(region):
-            return region.end()
-        regions.sort(key=get_end, reverse=True)
-
-        for region in regions:
+        for region in self.view.sel():
             if region.empty():
                 continue
             text = self.view.substr(region)
             replacement = self.encode(text)
             self.view.replace(edit, region, replacement)
-        self.view.end_edit(e)
 
 
 html_escape_table = {
@@ -130,12 +124,12 @@ class JsonUnescapeCommand(StringEncode):
 
 class UrlEncodeCommand(StringEncode):
     def encode(self, text):
-        return urllib.quote(text)
+        return urllib.parse.quote(text)
 
 
 class UrlDecodeCommand(StringEncode):
     def encode(self, text):
-        return urllib.unquote(text)
+        return urllib.parse.unquote(text)
 
 
 class Base64EncodeCommand(StringEncode):
@@ -169,3 +163,130 @@ class HexDecCommand(StringEncode):
 class DecHexCommand(StringEncode):
     def encode(self, text):
         return hex(int(text))
+
+
+class UnicodeHexCommand(StringEncode):
+    def encode(self, text):
+        hex_text = u''
+        text_bytes = bytes(text, 'utf-16')
+
+        if text_bytes[0:2] == b'\xff\xfe':
+            endian = 'little'
+            text_bytes = text_bytes[2:]
+        elif text_bytes[0:2] == b'\xfe\xff':
+            endian = 'big'
+            text_bytes = text_bytes[2:]
+
+        char_index = 0
+        for c in text_bytes:
+            if char_index == 0:
+                c1 = c
+                char_index += 1
+            elif char_index == 1:
+                c2 = c
+                if endian == 'little':
+                    c1, c2 = c2, c1
+                tmp = (c1 << 8) + c2
+                if tmp < 0x80:
+                    hex_text += chr(tmp)
+                    char_index = 0
+                elif tmp >= 0xd800 and tmp <= 0xdbff:
+                    char_index += 1
+                else:
+                    hex_text += '\\u' + '{0:04x}'.format(tmp)
+                    char_index = 0
+            elif char_index == 2:
+                c3 = c
+                char_index += 1
+            elif char_index == 3:
+                c4 = c
+                if endian == 'little':
+                    c3, c4 = c4, c3
+                tmp1 = ((c1 << 8) + c2) - 0xd800
+                tmp2 = ((c3 << 8) + c4) - 0xdc00
+                tmp = (tmp1 * 0x400) + tmp2 + 0x10000
+                hex_text += '\\U' + '{0:08x}'.format(tmp)
+                char_index = 0
+        return hex_text
+
+
+class HexUnicodeCommand(StringEncode):
+    def encode(self, text):
+        uni_text = text
+
+        endian = sys.byteorder
+
+        r = re.compile(r'\\u([0-9a-fA-F]{2})([0-9a-fA-F]{2})')
+        rr = r.search(uni_text)
+        while rr:
+            first_byte = int(rr.group(1), 16)
+
+            if first_byte >= 0xd8 and first_byte <= 0xdf:
+                # Surrogate pair
+                pass
+            else:
+                if endian == 'little':
+                    b1 = int(rr.group(2), 16)
+                    b2 = int(rr.group(1), 16)
+                else:
+                    b1 = int(rr.group(1), 16)
+                    b2 = int(rr.group(2), 16)
+
+                ch = bytes([b1, b2]).decode('utf-16')
+
+                uni_text = uni_text.replace(rr.group(0), ch)
+            rr = r.search(uni_text, rr.start(0)+1)
+
+        # Surrogate pair (2 bytes + 2 bytes)
+        r = re.compile(r'\\u([0-9a-fA-F]{2})([0-9a-fA-F]{2})\\u([0-9a-fA-F]{2})([0-9a-fA-F]{2})')
+        rr = r.search(uni_text)
+        while rr:
+            if endian == 'little':
+                b1 = int(rr.group(2), 16)
+                b2 = int(rr.group(1), 16)
+                b3 = int(rr.group(4), 16)
+                b4 = int(rr.group(3), 16)
+            else:
+                b1 = int(rr.group(1), 16)
+                b2 = int(rr.group(2), 16)
+                b3 = int(rr.group(3), 16)
+                b4 = int(rr.group(4), 16)
+
+            ch = bytes([b1, b2, b3, b4]).decode('utf-16')
+
+            uni_text = uni_text.replace(rr.group(0), ch)
+            rr = r.search(uni_text)
+
+        # Surrogate pair (4 bytes)
+        r = re.compile(r'\\U([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})')
+        rr = r.search(uni_text)
+        while rr:
+            tmp = (int(rr.group(1), 16) << 24) \
+                + (int(rr.group(2), 16) << 16) \
+                + (int(rr.group(3), 16) <<  8) \
+                + (int(rr.group(4), 16))
+
+            if (tmp <= 0xffff):
+                ch = chr(tmp)
+            else:
+                tmp -= 0x10000
+                c1 = 0xd800 + int(tmp / 0x400)
+                c2 = 0xdc00 + int(tmp % 0x400)
+                if endian == 'little':
+                    b1 = c1 & 0xff
+                    b2 = c1 >> 8
+                    b3 = c2 & 0xff
+                    b4 = c2 >> 8
+                else:
+                    b1 = c1 >> 8
+                    b2 = c1 & 0xff
+                    b3 = c2 >> 8
+                    b4 = c2 & 0xff
+
+                ch = bytes([b1, b2, b3, b4]).decode('utf-16')
+
+            uni_text = uni_text.replace(rr.group(0), ch)
+            rr = r.search(uni_text)
+
+        return uni_text
+
