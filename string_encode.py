@@ -3,12 +3,11 @@ import urllib
 import base64
 import re
 import json
+import sys
 from functools import cmp_to_key
 
 import sublime_plugin
 
-import re
-import sys
 
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit):
