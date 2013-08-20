@@ -3,7 +3,6 @@ import urllib
 import base64
 import re
 import json
-from functools import cmp_to_key
 
 import sublime_plugin
 
