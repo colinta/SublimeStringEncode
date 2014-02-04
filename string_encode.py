@@ -122,7 +122,7 @@ class JsonUnescapeCommand(StringEncode):
 
 class UrlEncodeCommand(StringEncode):
     def encode(self, text):
-        return urllib.parse.quote(text)
+        return urllib.parse.quote(text).replace('/', '%2F')
 
 
 class UrlDecodeCommand(StringEncode):
