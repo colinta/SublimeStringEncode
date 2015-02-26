@@ -1,0 +1,97 @@
+[
+    {
+        "id": "edit",
+        "children": [
+            {
+                "caption": "-",
+                "id": "stringencode"
+            },
+            {
+                "caption": "StringEncode",
+                "children": [
+                    {
+                        "caption": "HTML Entitize",
+                        "command": "html_entitize"
+                    },
+                    {
+                        "caption": "HTML Deentitize",
+                        "command": "html_deentitize"
+                    },
+                    {
+                        "caption": "XML Entitize",
+                        "command": "xml_entitize"
+                    },
+                    {
+                        "caption": "XML Deentitize",
+                        "command": "xml_deentitize"
+                    },
+                    {
+                        "caption": "Safe HTML Entitize",
+                        "command": "safe_html_entitize"
+                    },
+                    {
+                        "caption": "Safe HTML Deentitize",
+                        "command": "safe_html_deentitize"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "URL Encode",
+                        "command": "url_encode"
+                    },
+                    {
+                        "caption": "URL Decode",
+                        "command": "url_decode"
+                    },
+                    {
+                        "caption": "Base64 Encode",
+                        "command": "base64_encode"
+                    },
+                    {
+                        "caption": "Base64 Decode",
+                        "command": "base64_decode"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "JSON Escape",
+                        "command": "json_escape"
+                    },
+                    {
+                        "caption": "JSON Unescape",
+                        "command": "json_unescape"
+                    },
+                    {
+                        "caption": "Escape regex",
+                        "command": "escape_regex"
+                    },
+                    {
+                        "caption": "Escape LIKE",
+                        "command": "escape_like"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Decimal to Hexadecimal",
+                        "command": "dec_hex"
+                    },
+                    {
+                        "caption": "Hexadecimal to Decimal",
+                        "command": "hex_dec"
+                    },
+                    {
+                        "caption": "Unicode to Hexadecimal",
+                        "command": "unicode_hex"
+                    },
+                    {
+                        "caption": "Hexadecimal to Unicode",
+                        "command": "hex_unicode"
+                    }
+                ]
+            }
+        ]
+    }
+]
