@@ -53,6 +53,18 @@
                         "command": "base64_decode"
                     },
                     {
+                        "caption": "MD5",
+                        "command": "md5_encode"
+                    },
+                    {
+                        "caption": "Sha256",
+                        "command": "sha256_encode"
+                    },
+                    {
+                        "caption": "Sha512",
+                        "command": "sha512_encode"
+                    },
+                    {
                         "caption": "-"
                     },
                     {

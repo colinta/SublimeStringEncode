@@ -40,6 +40,18 @@
         "command": "url_decode"
     },
     {
+        "caption": "MD5",
+        "command": "md5_encode"
+    },
+    {
+        "caption": "Sha256",
+        "command": "sha256_encode"
+    },
+    {
+        "caption": "Sha512",
+        "command": "sha512_encode"
+    },
+    {
         "caption": "StringEncode: Base64 Encode",
         "command": "base64_encode"
     },

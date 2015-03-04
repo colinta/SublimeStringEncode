@@ -3,6 +3,7 @@ import urllib
 import base64
 import re
 import json
+import hashlib
 import sys
 
 import sublime_plugin
@@ -138,6 +139,27 @@ class Base64EncodeCommand(StringEncode):
 class Base64DecodeCommand(StringEncode):
     def encode(self, text):
         return base64.b64decode(text).decode('raw_unicode_escape')
+
+
+class Md5EncodeCommand(StringEncode):
+    def encode(self, text):
+        hasher = hashlib.md5()
+        hasher.update(bytes(text, 'utf-8'))
+        return hasher.hexdigest()
+
+
+class Sha256EncodeCommand(StringEncode):
+    def encode(self, text):
+        hasher = hashlib.sha256()
+        hasher.update(bytes(text, 'utf-8'))
+        return hasher.hexdigest()
+
+
+class Sha512EncodeCommand(StringEncode):
+    def encode(self, text):
+        hasher = hashlib.sha512()
+        hasher.update(bytes(text, 'utf-8'))
+        return hasher.hexdigest()
 
 
 class Escaper(StringEncode):

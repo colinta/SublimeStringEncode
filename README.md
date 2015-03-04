@@ -44,6 +44,12 @@ Commands
 
 `base64_decode`: Uses base64 to decode from base64
 
+`md5_encode`: Uses sha package to create md5 hash
+
+`sha256_encode`: Uses sha package to create sha256 hash
+
+`sha512_encode`: Uses sha package to create sha512 hash
+
 `escape_regex`: Escapes regex meta characters
 
 `escape_like`: Escapes SQL-LIKE meta characters
