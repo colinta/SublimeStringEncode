@@ -5,15 +5,14 @@ import re
 import json
 import hashlib
 import sys
-
+import sublime
 import sublime_plugin
-
 
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit):
         for region in self.view.sel():
             if region.empty():
-                continue
+                region = sublime.Region(0, self.view.size())
             text = self.view.substr(region)
             replacement = self.encode(text)
             self.view.replace(edit, region, replacement)
