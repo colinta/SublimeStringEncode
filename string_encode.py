@@ -1,5 +1,4 @@
 # coding: utf8
-import urllib
 import base64
 import re
 import json
@@ -7,6 +6,16 @@ import hashlib
 import sys
 import sublime
 import sublime_plugin
+
+try:
+    import urllib.parse
+    quote_plus = urllib.parse.quote_plus
+    unquote_plus = urllib.parse.unquote_plus
+except ImportError:
+    import urllib
+    quote_plus = urllib.quote_plus
+    unquote_plus = urllib.unquote_plus
+
 
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -122,12 +131,12 @@ class JsonUnescapeCommand(StringEncode):
 
 class UrlEncodeCommand(StringEncode):
     def encode(self, text):
-        return urllib.parse.quote_plus(text.encode('utf8'))
+        return quote_plus(text.encode('utf8'))
 
 
 class UrlDecodeCommand(StringEncode):
     def encode(self, text):
-        return urllib.parse.unquote_plus(text.encode('utf8'))
+        return unquote_plus(text.encode('utf8'))
 
 
 class Base64EncodeCommand(StringEncode):
