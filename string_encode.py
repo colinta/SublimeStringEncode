@@ -122,12 +122,12 @@ class JsonUnescapeCommand(StringEncode):
 
 class UrlEncodeCommand(StringEncode):
     def encode(self, text):
-        return urllib.parse.quote(text).replace('/', '%2F')
+        return urllib.quote_plus(text.encode('utf8'))
 
 
 class UrlDecodeCommand(StringEncode):
     def encode(self, text):
-        return urllib.parse.unquote(text)
+        return urllib.unquote_plus(text.encode('utf8'))
 
 
 class Base64EncodeCommand(StringEncode):
@@ -308,4 +308,3 @@ class HexUnicodeCommand(StringEncode):
             rr = r.search(uni_text)
 
         return uni_text
-
