@@ -70,6 +70,25 @@ class HtmlDeentitizeCommand(StringEncode):
         return text
 
 
+class CssEscapeCommand(StringEncode):
+    def encode(self, text):
+        ret = ''
+        for i, c in enumerate(text):
+            if ord(c) > 127:
+                ret += hex(ord(c)).replace('0x', '\\')
+            else:
+                ret += c
+        return ret
+
+
+class CssUnescapeCommand(StringEncode):
+    def encode(self, text):
+        while re.search(r'\\[a-fA-F0-9]+', text):
+            match = re.search(r'\\([a-fA-F0-9]+)', text)
+            text = text.replace(match.group(0), unichr(int('0x' + match.group(1), 16)))
+        return text
+
+
 class SafeHtmlEntitizeCommand(StringEncode):
     def encode(self, text):
         for k in html_escape_table:

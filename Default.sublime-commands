@@ -8,6 +8,14 @@
         "command": "html_deentitize"
     },
     {
+        "caption": "StringEncode: CSS Escape",
+        "command": "css_escape"
+    },
+    {
+        "caption": "StringEncode: CSS Unescape",
+        "command": "css_unescape"
+    },
+    {
         "caption": "StringEncode: XML Entitize",
         "command": "xml_entitize"
     },
