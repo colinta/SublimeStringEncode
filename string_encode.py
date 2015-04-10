@@ -17,6 +17,13 @@ except ImportError:
     unquote_plus = urllib.unquote_plus
 
 
+try:
+    unichr(32)
+except NameError:
+    def unichr(val):
+        return chr(val)
+
+
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit):
         for region in self.view.sel():
