@@ -13,8 +13,10 @@ try:
     unquote_plus = urllib.parse.unquote_plus
 except ImportError:
     import urllib
-    quote_plus = urllib.quote_plus
-    unquote_plus = urllib.unquote_plus
+    def quote_plus(text):
+        return urllib.quote_plus(text.encode('utf8'))
+    def unquote_plus(text):
+        return urllib.unquote_plus(text.encode('utf8'))
 
 
 try:
@@ -157,12 +159,12 @@ class JsonUnescapeCommand(StringEncode):
 
 class UrlEncodeCommand(StringEncode):
     def encode(self, text):
-        return quote_plus(text.encode('utf8'))
+        return quote_plus(text)
 
 
 class UrlDecodeCommand(StringEncode):
     def encode(self, text):
-        return unquote_plus(text.encode('utf8'))
+        return unquote_plus(text)
 
 
 class Base64EncodeCommand(StringEncode):
