@@ -1,3 +1,5 @@
+# coding: utf8
+
 html_escape_table = {
     u"\"": "&quot;",
     u"'": "&#039;",
