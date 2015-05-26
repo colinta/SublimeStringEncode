@@ -7,7 +7,7 @@ import sys
 import sublime
 import sublime_plugin
 
-from stringencode.escape_table import (
+from .stringencode.escape_table import (
     html_escape_table,
     html_reserved_list,
     xml_escape_table
