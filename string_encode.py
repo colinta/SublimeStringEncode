@@ -7,11 +7,18 @@ import sys
 import sublime
 import sublime_plugin
 
-from .stringencode.escape_table import (
-    html_escape_table,
-    html_reserved_list,
-    xml_escape_table
-)
+try:
+    from .stringencode.escape_table import (
+        html_escape_table,
+        html_reserved_list,
+        xml_escape_table
+    )
+except ValueError:
+    from stringencode.escape_table import (
+        html_escape_table,
+        html_reserved_list,
+        xml_escape_table
+    )
 
 try:
     import urllib.parse
