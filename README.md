@@ -25,7 +25,9 @@ Commands
 
 `html_deentitize`: Converts HTML entities to a character
 
-`url_encode`: Uses urllib.quote to escape special URL characters
+`url_encode`: Uses urllib.quote to escape special URL characters.
+- Accepts an `old_school` argument (default: `True`).  Setting it to `False`
+  will return `%20` instead of `+` when encoding spaces.
 
 `url_decode`: Uses urllib.unquote to convert escaped URL characters
 
