@@ -43,12 +43,12 @@ except NameError:
 
 class StringEncode(sublime_plugin.TextCommand):
 
-    def run(self, edit):
+    def run(self, edit, **kwargs):
         for region in self.view.sel():
             if region.empty():
                 region = sublime.Region(0, self.view.size())
             text = self.view.substr(region)
-            replacement = self.encode(text)
+            replacement = self.encode(text, **kwargs)
             self.view.replace(edit, region, replacement)
 
 
@@ -179,8 +179,11 @@ class JsonUnescapeCommand(StringEncode):
 
 class UrlEncodeCommand(StringEncode):
 
-    def encode(self, text):
-        return quote_plus(text)
+    def encode(self, text, old_school=True):
+        quoted = quote_plus(text)
+        if old_school:
+            return quoted.replace("+", "%20")
+        return quoted
 
 
 class UrlDecodeCommand(StringEncode):
