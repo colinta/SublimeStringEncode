@@ -3,6 +3,8 @@ StringEncode
 
 Converts characters from one "encoding" to another using a transformation (think HTML entities, not character encodings).
 
+This plugin was intended to be used with selections, but if you *don't* have any text selected, it will act on *the entire document*.  This can be handy (if you're base64-encoding a file, for instance), but also have unintended consequences.  For instance, you probably should not use `URL Decode` on an entire text document.
+
 Installation
 ------------
 
