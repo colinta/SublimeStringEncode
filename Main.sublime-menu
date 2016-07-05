@@ -10,6 +10,13 @@
                 "caption": "StringEncode",
                 "children": [
                     {
+                        "caption": "StringEncode: Paste Encoded...",
+                        "command": "string_encode_paste"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
                         "caption": "HTML Entitize",
                         "command": "html_entitize"
                     },

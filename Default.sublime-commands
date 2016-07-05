@@ -1,5 +1,9 @@
 [
     {
+        "caption": "StringEncode: Paste Encoded...",
+        "command": "string_encode_paste"
+    },
+    {
         "caption": "StringEncode: HTML Entitize",
         "command": "html_entitize"
     },

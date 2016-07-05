@@ -40,13 +40,69 @@ except NameError:
     def unichr(val):
         return chr(val)
 
+class StringEncodePaste(sublime_plugin.WindowCommand):
+    def run(self, **kwargs):
+        items = [
+            ('Html Entitize', 'html_entitize'),
+            ('Html Deentitize', 'html_deentitize'),
+            ('Css Escape', 'css_escape'),
+            ('Css Unescape', 'css_unescape'),
+            ('Safe Html Entitize', 'safe_html_entitize'),
+            ('Safe Html Deentitize', 'safe_html_deentitize'),
+            ('Xml Entitize', 'xml_entitize'),
+            ('Xml Deentitize', 'xml_deentitize'),
+            ('Json Escape', 'json_escape'),
+            ('Json Unescape', 'json_unescape'),
+            ('Url Encode', 'url_encode'),
+            ('Url Decode', 'url_decode'),
+            ('Base64 Encode', 'base64_encode'),
+            ('Base64 Decode', 'base64_decode'),
+            ('Md5 Encode', 'md5_encode'),
+            ('Sha256 Encode', 'sha256_encode'),
+            ('Sha512 Encode', 'sha512_encode'),
+            ('Escape Regex', 'escape_regex'),
+            ('Escape Like', 'escape_like'),
+            ('Hex Dec', 'hex_dec'),
+            ('Dec Hex', 'dec_hex'),
+            ('Unicode Hex', 'unicode_hex'),
+            ('Hex Unicode', 'hex_unicode'),
+        ]
+
+        lines = list(map(lambda line: line[0], items))
+        commands = list(map(lambda line: line[1], items))
+        view = self.window.active_view()
+        if not view:
+            return
+
+        def on_done(item):
+            if item == -1:
+                return
+            view.run_command(commands[item], {'source': 'clipboard'})
+
+        self.window.show_quick_panel(lines, on_done)
 
 class StringEncode(sublime_plugin.TextCommand):
-
     def run(self, edit, **kwargs):
-        for region in self.view.sel():
-            if region.empty():
-                region = sublime.Region(0, self.view.size())
+        regions = self.view.sel()
+
+        if kwargs.get('source') == 'clipboard':
+            del kwargs['source']
+            text = sublime.get_clipboard()
+            replacement = self.encode(text, **kwargs)
+            for region in regions:
+                if region.empty():
+                    self.view.insert(edit, region.begin(), replacement)
+                else:
+                    self.view.replace(edit, region, replacement)
+            return
+
+        elif kwargs.has_key('source'):
+            sublime.status_message('Unsupported source {0!r}'.format(kwargs['source']))
+            return
+
+        if any(map(lambda region: region.empty(), regions)):
+            regions = [sublime.Region(0, self.view.size())]
+        for region in regions:
             text = self.view.substr(region)
             replacement = self.encode(text, **kwargs)
             self.view.replace(edit, region, replacement)
