@@ -1,9 +1,23 @@
 StringEncode
 ============
 
-Converts characters from one "encoding" to another using a transformation (think HTML entities, not character encodings).
+Encodes text.  "Encode" in this context refers to HTML entities or URL encoding, not character encodings.  Most of these commands work in both directions (e.g. you can encode *to* html entities, or *from* html entities).
+
+- Html entities
+- Css (e.g. unicode characters)
+- Xml entities
+- Json strings
+- Urls
+- Base64 encoding
+- Hash: Md5, Sha256, Sha512
+- Regex escape
+- SQL 'LIKE' escape
+- Hexadecimal / Decimal
+- Unicode Hexadecimal representation
 
 This plugin was intended to be used with selections, but if you *don't* have any text selected, it will act on *the entire document*.  This can be handy (if you're base64-encoding a file, for instance), but also have unintended consequences.  For instance, you probably should not use `URL Decode` on an entire text document.
+
+You can also encode the clipboard, use the `string_encode_paste` command, and you will be presented with a menu to choose the encoding, and the clipboard will be encoded and inserted.
 
 Installation
 ------------
@@ -22,6 +36,8 @@ Or:
 
 Commands
 --------
+
+`string_encode_paste`: Converts the clipboard to the desired encoding.
 
 `html_entitize`: Converts characters to their HTML entity
 
