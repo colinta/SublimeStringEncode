@@ -96,7 +96,7 @@ class StringEncode(sublime_plugin.TextCommand):
                     self.view.replace(edit, region, replacement)
             return
 
-        elif kwargs.has_key('source'):
+        elif 'source' in kwargs:
             sublime.status_message('Unsupported source {0!r}'.format(kwargs['source']))
             return
 
