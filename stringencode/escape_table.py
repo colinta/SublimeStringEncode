@@ -246,9 +246,14 @@ html_escape_table = {
     u"♦": "&diams;",
     u"\xa0": "&nbsp;",
 }
+
+html5_escape_table = {
+    u"'": "&apos;",
+}
+
 xml_escape_table = {
     u"\"": "&quot;",
-    u"'": "&#039;",
+    u"'": "&apos;",
     u"<": "&lt;",
     u">": "&gt;"
 }

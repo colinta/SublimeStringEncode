@@ -10,11 +10,13 @@ import sublime_plugin
 try:
     from .stringencode.escape_table import (
         html_escape_table,
+        html5_escape_table,
         html_reserved_list,
         xml_escape_table
     )
 except ValueError:
     from stringencode.escape_table import (
+        html5_escape_table,
         html_escape_table,
         html_reserved_list,
         xml_escape_table
@@ -129,6 +131,9 @@ class HtmlDeentitizeCommand(StringEncode):
     def encode(self, text):
         for k in html_escape_table:
             v = html_escape_table[k]
+            text = text.replace(v, k)
+        for k in html5_escape_table:
+            v = html5_escape_table[k]
             text = text.replace(v, k)
         while re.search('&#[xX][a-fA-F0-9]+;', text):
             match = re.search('&#[xX]([a-fA-F0-9]+);', text)
