@@ -139,6 +139,10 @@ class HtmlDeentitizeCommand(StringEncode):
             match = re.search('&#[xX]([a-fA-F0-9]+);', text)
             text = text.replace(
                 match.group(0), unichr(int('0x' + match.group(1), 16)))
+        while re.search('&#[0-9]+;', text):
+            match = re.search('&#([0-9]+);', text)
+            text = text.replace(
+                match.group(0), unichr(int(match.group(1), 10)))
         text = text.replace('&amp;', '&')
         return text
 
@@ -196,6 +200,10 @@ class SafeHtmlDeentitizeCommand(StringEncode):
             match = re.search('&#[xX]([a-fA-F0-9]+);', text)
             text = text.replace(
                 match.group(0), unichr(int('0x' + match.group(1), 16)))
+        while re.search('&#[0-9]+;', text):
+            match = re.search('&#([0-9]+);', text)
+            text = text.replace(
+                match.group(0), unichr(int(match.group(1), 10)))
         text = text.replace('&amp;', '&')
         return text
 
