@@ -270,7 +270,7 @@ class Base64EncodeCommand(StringEncode):
 class Base64DecodeCommand(StringEncode):
 
     def encode(self, text):
-        return base64.b64decode(text).decode('raw_unicode_escape')
+        return base64.b64decode(text + '===').decode('raw_unicode_escape')
 
 
 class Md5EncodeCommand(StringEncode):
