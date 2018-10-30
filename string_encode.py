@@ -226,6 +226,10 @@ class JsonEscapeCommand(StringEncode):
 class JsonUnescapeCommand(StringEncode):
 
     def encode(self, text):
+        if text[:1] == "'" and text[-1:] == "'":
+            return self.encode(text[1:-1])
+        if text[:1] != '"' and text[-1:] != '"':
+            return self.encode('"' + text.replace('"', '\\"') + '"')
         return json.loads(text)
 
 
