@@ -6,10 +6,6 @@
   "labels": ["text manipulation"],
   "releases": [
     {
-      "details": "https://github.com/colinta/SublimeStringEncode/tree/master",
-      "sublime_text": "<3000"
-    },
-    {
       "details": "https://github.com/colinta/SublimeStringEncode/tags",
       "sublime_text": ">=3000"
     }

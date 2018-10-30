@@ -7,33 +7,16 @@ import sys
 import sublime
 import sublime_plugin
 
-try:
-    from .stringencode.escape_table import (
-        html_escape_table,
-        html5_escape_table,
-        html_reserved_list,
-        xml_escape_table
-    )
-except ValueError:
-    from stringencode.escape_table import (
-        html5_escape_table,
-        html_escape_table,
-        html_reserved_list,
-        xml_escape_table
-    )
+from .stringencode.escape_table import (
+    html_escape_table,
+    html5_escape_table,
+    html_reserved_list,
+    xml_escape_table
+)
 
-try:
-    import urllib.parse
-    quote_plus = urllib.parse.quote_plus
-    unquote_plus = urllib.parse.unquote_plus
-except ImportError:
-    import urllib
-
-    def quote_plus(text):
-        return urllib.quote_plus(text.encode('utf8'))
-
-    def unquote_plus(text):
-        return urllib.unquote_plus(text.encode('utf8'))
+import urllib.parse
+quote_plus = urllib.parse.quote_plus
+unquote_plus = urllib.parse.unquote_plus
 
 
 try:
