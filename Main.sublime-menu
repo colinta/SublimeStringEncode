@@ -25,6 +25,14 @@
                         "command": "html_deentitize"
                     },
                     {
+                        "caption": "CSS Escape",
+                        "command": "css_escape"
+                    },
+                    {
+                        "caption": "CSS Unescape",
+                        "command": "css_unescape"
+                    },
+                    {
                         "caption": "XML Entitize",
                         "command": "xml_entitize"
                     },
