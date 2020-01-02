@@ -10,7 +10,7 @@
                 "caption": "StringEncode",
                 "children": [
                     {
-                        "caption": "StringEncode: Paste Encoded...",
+                        "caption": "Paste Encoded...",
                         "command": "string_encode_paste"
                     },
                     {
