@@ -291,7 +291,7 @@ class Escaper(StringEncode):
 
 
 class EscapeRegexCommand(Escaper):
-    meta = r'[?\\*.+^$()\[\]\{\}]'
+    meta = r'[?\\*.+^$()\[\]\{\}\|]'
 
 
 class EscapeLikeCommand(Escaper):
