@@ -10,7 +10,7 @@
                 "caption": "StringEncode",
                 "children": [
                     {
-                        "caption": "StringEncode: Paste Encoded...",
+                        "caption": "Paste Encoded...",
                         "command": "string_encode_paste"
                     },
                     {
@@ -23,6 +23,14 @@
                     {
                         "caption": "HTML Deentitize",
                         "command": "html_deentitize"
+                    },
+                    {
+                        "caption": "CSS Escape",
+                        "command": "css_escape"
+                    },
+                    {
+                        "caption": "CSS Unescape",
+                        "command": "css_unescape"
                     },
                     {
                         "caption": "XML Entitize",
