@@ -92,6 +92,10 @@
         "command": "unicode_hex"
     },
     {
+        "caption": "StringEncode: Decode Escaped Unicode",
+        "command": "unicode_escape"
+    },
+    {
         "caption": "StringEncode: Hexadecimal to Unicode",
         "command": "hex_unicode"
     }
