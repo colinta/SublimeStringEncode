@@ -6,6 +6,7 @@ import hashlib
 import sys
 import sublime
 import sublime_plugin
+import codecs
 
 from .stringencode.escape_table import (
     html_escape_table,
@@ -30,6 +31,7 @@ class StringEncodePaste(sublime_plugin.WindowCommand):
         items = [
             ('Html Entitize', 'html_entitize'),
             ('Html Deentitize', 'html_deentitize'),
+            ('Unicode Escape', 'unicode_escape'),
             ('Css Escape', 'css_escape'),
             ('Css Unescape', 'css_unescape'),
             ('Safe Html Entitize', 'safe_html_entitize'),
@@ -91,6 +93,12 @@ class StringEncode(sublime_plugin.TextCommand):
             text = self.view.substr(region)
             replacement = self.encode(text, **kwargs)
             self.view.replace(edit, region, replacement)
+
+
+class UnicodeEscapeCommand(StringEncode):
+
+    def encode(self, text):
+        return codecs.decode(text, 'unicode-escape')
 
 
 class HtmlEntitizeCommand(StringEncode):

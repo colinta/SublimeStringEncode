@@ -17,6 +17,10 @@
                         "caption": "-"
                     },
                     {
+                        "caption": "Decode Escaped Unicode",
+                        "command": "unicode_escape"
+                    },
+                    {
                         "caption": "HTML Entitize",
                         "command": "html_entitize"
                     },
