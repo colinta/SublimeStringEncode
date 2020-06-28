@@ -1,5 +1,6 @@
 # coding: utf8
 import base64
+import gzip
 import re
 import json
 import hashlib
@@ -53,6 +54,8 @@ class StringEncodePaste(sublime_plugin.WindowCommand):
             ('Dec Hex', 'dec_hex'),
             ('Unicode Hex', 'unicode_hex'),
             ('Hex Unicode', 'hex_unicode'),
+            ('Gzip64 Encode', 'gzip64_encode'),
+            ('Gzip64 Decode', 'gzip64_decode'),
         ]
 
         lines = list(map(lambda line: line[0], items))
@@ -94,6 +97,16 @@ class StringEncode(sublime_plugin.TextCommand):
             replacement = self.encode(text, **kwargs)
             self.view.replace(edit, region, replacement)
 
+
+class Gzip64EncodeCommand(StringEncode):
+
+    def encode(self, text):
+        return base64.b64encode(gzip.compress(bytes(text, 'utf-8'))).decode('ascii')
+
+class Gzip64DecodeCommand(StringEncode):
+
+    def encode(self, text):
+        return gzip.decompress(base64.b64decode(text.rstrip('=') + '===')).decode('utf-8')
 
 class UnicodeEscapeCommand(StringEncode):
 
