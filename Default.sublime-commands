@@ -98,5 +98,13 @@
     {
         "caption": "StringEncode: Hexadecimal to Unicode",
         "command": "hex_unicode"
+    },
+    {
+            "caption": "StringEncode: GZip and Base64 Encode",
+            "command": "gzip64_encode"
+    },
+    {
+         "caption": "StringEncode: GZip and Base64 Decode",
+         "command": "gzip64_decode"
     }
 ]
