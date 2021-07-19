@@ -272,13 +272,13 @@ class UrlDecodeCommand(StringEncode):
 class Base64EncodeCommand(StringEncode):
 
     def encode(self, text):
-        return base64.b64encode(text.encode('raw_unicode_escape')).decode('ascii')
+        return base64.b64encode(bytes(text, 'utf-8')).decode('ascii')
 
 
 class Base64DecodeCommand(StringEncode):
 
     def encode(self, text):
-        return base64.b64decode(text + '===').decode('raw_unicode_escape')
+        return base64.b64decode(text + '===').decode('utf-8')
 
 
 class Md5EncodeCommand(StringEncode):
