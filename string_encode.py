@@ -87,7 +87,7 @@ class StringEncode(sublime_plugin.TextCommand):
             return
 
         elif 'source' in kwargs:
-            sublime.status_message('Unsupported source {0!r}'.format(kwargs['source']))
+            self.view.show_popup('Unsupported source {0!r}'.format(kwargs['source']))
             return
 
         if any(map(lambda region: region.empty(), regions)):
