@@ -106,7 +106,14 @@ class Gzip64EncodeCommand(StringEncode):
 class Gzip64DecodeCommand(StringEncode):
 
     def encode(self, text):
-        return gzip.decompress(base64.b64decode(text.rstrip('=') + '===')).decode('utf-8')
+        value = bytearray(text, 'ascii')
+        mod = len(value) % 4
+        if mod == 3:
+            value.extend(b"=")
+        elif mod == 2:
+            value.extend(b"==")
+
+        return str(gzip.decompress(base64.b64decode(value)), 'utf-8')
 
 class UnicodeEscapeCommand(StringEncode):
 
@@ -278,7 +285,14 @@ class Base64EncodeCommand(StringEncode):
 class Base64DecodeCommand(StringEncode):
 
     def encode(self, text):
-        return base64.b64decode(text + '===').decode('raw_unicode_escape')
+        value = bytearray(text, 'ascii')
+        mod = len(value) % 4
+        if mod == 3:
+            value.extend(b"=")
+        elif mod == 2:
+            value.extend(b"==")
+
+        return str(base64.b64decode(value), 'utf-8')
 
 
 class Md5EncodeCommand(StringEncode):
