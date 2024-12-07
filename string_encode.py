@@ -20,6 +20,36 @@ import urllib.parse
 quote_plus = urllib.parse.quote_plus
 unquote_plus = urllib.parse.unquote_plus
 
+__all__ = [
+    "StringEncodePaste",
+    "Gzip64EncodeCommand",
+    "Gzip64DecodeCommand",
+    "UnicodeEscapeCommand",
+    "HtmlEntitizeCommand",
+    "HtmlDeentitizeCommand",
+    "CssEscapeCommand",
+    "CssUnescapeCommand",
+    "SafeHtmlEntitizeCommand",
+    "SafeHtmlDeentitizeCommand",
+    "XmlEntitizeCommand",
+    "XmlDeentitizeCommand",
+    "JsonEscapeCommand",
+    "JsonUnescapeCommand",
+    "UrlEncodeCommand",
+    "UrlDecodeCommand",
+    "Base64EncodeCommand",
+    "Base64DecodeCommand",
+    "Md5EncodeCommand",
+    "Sha256EncodeCommand",
+    "Sha512EncodeCommand",
+    "EscapeRegexCommand",
+    "EscapeLikeCommand",
+    "HexDecCommand",
+    "DecHexCommand",
+    "UnicodeHexCommand",
+    "HexUnicodeCommand",
+]
+
 
 class StringEncodePaste(sublime_plugin.WindowCommand):
     def run(self, **kwargs):
