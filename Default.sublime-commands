@@ -52,15 +52,15 @@
         "command": "url_decode"
     },
     {
-        "caption": "MD5",
+        "caption": "StringEncode: MD5 Encode",
         "command": "md5_encode"
     },
     {
-        "caption": "Sha256",
+        "caption": "StringEncode: Sha256 Encode",
         "command": "sha256_encode"
     },
     {
-        "caption": "Sha512",
+        "caption": "StringEncode: Sha512 Encode",
         "command": "sha512_encode"
     },
     {
