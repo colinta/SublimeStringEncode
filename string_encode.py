@@ -312,8 +312,11 @@ class EscapeRegexCommand(StringEncode):
         return self.regex.sub(r'\\\1', text)
 
 
-class EscapeLikeCommand(EscapeRegexCommand):
+class EscapeLikeCommand(StringEncode):
     regex = re.compile(r'(?<!\\)([%_])')
+
+    def encode(self, text):
+        return self.regex.sub(r'\\\1', text)
 
 
 class HexDecCommand(StringEncode):
