@@ -133,12 +133,12 @@ class HtmlDeentitizeCommand(StringEncode):
         for k in html5_escape_table:
             v = html5_escape_table[k]
             text = text.replace(v, k)
-        while re.search('&#[xX][a-fA-F0-9]+;', text):
-            match = re.search('&#[xX]([a-fA-F0-9]+);', text)
+        while re.search(r'&#[xX][a-fA-F0-9]+;', text):
+            match = re.search(r'&#[xX]([a-fA-F0-9]+);', text)
             text = text.replace(
                 match.group(0), chr(int('0x' + match.group(1), 16)))
-        while re.search('&#[0-9]+;', text):
-            match = re.search('&#([0-9]+);', text)
+        while re.search(r'&#[0-9]+;', text):
+            match = re.search(r'&#([0-9]+);', text)
             text = text.replace(
                 match.group(0), chr(int(match.group(1), 10)))
         text = text.replace('&amp;', '&')
@@ -194,12 +194,12 @@ class SafeHtmlDeentitizeCommand(StringEncode):
                 continue
             v = html_escape_table[k]
             text = text.replace(v, k)
-        while re.search('&#[xX][a-fA-F0-9]+;', text):
-            match = re.search('&#[xX]([a-fA-F0-9]+);', text)
+        while re.search(r'&#[xX][a-fA-F0-9]+;', text):
+            match = re.search(r'&#[xX]([a-fA-F0-9]+);', text)
             text = text.replace(
                 match.group(0), chr(int('0x' + match.group(1), 16)))
-        while re.search('&#[0-9]+;', text):
-            match = re.search('&#([0-9]+);', text)
+        while re.search(r'&#[0-9]+;', text):
+            match = re.search(r'&#([0-9]+);', text)
             text = text.replace(
                 match.group(0), chr(int(match.group(1), 10)))
         text = text.replace('&amp;', '&')
