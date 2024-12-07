@@ -76,8 +76,16 @@
                         "command": "md5_encode"
                     },
                     {
+                        "caption": "Sha1 Encode",
+                        "command": "sha1_encode"
+                    },
+                    {
                         "caption": "Sha256 Encode",
                         "command": "sha256_encode"
+                    },
+                    {
+                        "caption": "Sha384 Encode",
+                        "command": "sha384_encode"
                     },
                     {
                         "caption": "Sha512 Encode",
