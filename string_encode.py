@@ -1,13 +1,13 @@
 # coding: utf8
 import base64
+import codecs
 import gzip
-import re
-import json
 import hashlib
-import sys
+import json
+import re
 import sublime
 import sublime_plugin
-import codecs
+import sys
 
 from .stringencode.escape_table import (
     html_escape_table,
@@ -65,6 +65,7 @@ class StringEncodePaste(sublime_plugin.WindowCommand):
 
         self.window.show_quick_panel(lines, on_done)
 
+
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit, **kwargs):
         regions = self.view.sel()
@@ -97,10 +98,12 @@ class Gzip64EncodeCommand(StringEncode):
     def encode(self, text):
         return base64.b64encode(gzip.compress(bytes(text, 'utf-8'))).decode('ascii')
 
+
 class Gzip64DecodeCommand(StringEncode):
 
     def encode(self, text):
         return gzip.decompress(base64.b64decode(text.rstrip('=') + '===')).decode('utf-8')
+
 
 class UnicodeEscapeCommand(StringEncode):
 
