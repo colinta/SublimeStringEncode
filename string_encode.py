@@ -284,25 +284,19 @@ class Base64DecodeCommand(StringEncode):
 class Md5EncodeCommand(StringEncode):
 
     def encode(self, text):
-        hasher = hashlib.md5()
-        hasher.update(bytes(text, 'utf-8'))
-        return hasher.hexdigest()
+        return hashlib.md5(bytes(text, 'utf-8')).hexdigest()
 
 
 class Sha256EncodeCommand(StringEncode):
 
     def encode(self, text):
-        hasher = hashlib.sha256()
-        hasher.update(bytes(text, 'utf-8'))
-        return hasher.hexdigest()
+        return hashlib.sha256(bytes(text, 'utf-8')).hexdigest()
 
 
 class Sha512EncodeCommand(StringEncode):
 
     def encode(self, text):
-        hasher = hashlib.sha512()
-        hasher.update(bytes(text, 'utf-8'))
-        return hasher.hexdigest()
+        return hashlib.sha512(bytes(text, 'utf-8')).hexdigest()
 
 
 class Escaper(StringEncode):
