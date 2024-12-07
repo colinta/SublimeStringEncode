@@ -37,6 +37,10 @@ __all__ = [
     "JsonUnescapeCommand",
     "UrlEncodeCommand",
     "UrlDecodeCommand",
+    "Base16EncodeCommand",
+    "Base16DecodeCommand",
+    "Base32EncodeCommand",
+    "Base32DecodeCommand",
     "Base64EncodeCommand",
     "Base64DecodeCommand",
     "Md5EncodeCommand",
@@ -69,6 +73,10 @@ class StringEncodePaste(sublime_plugin.WindowCommand):
             ('Json Unescape', 'json_unescape'),
             ('Url Encode', 'url_encode'),
             ('Url Decode', 'url_decode'),
+            ('Base16 Encode', 'base16_encode'),
+            ('Base16 Decode', 'base16_decode'),
+            ('Base32 Encode', 'base32_encode'),
+            ('Base32 Decode', 'base32_decode'),
             ('Base64 Encode', 'base64_encode'),
             ('Base64 Decode', 'base64_decode'),
             ('Md5 Encode', 'md5_encode'),
@@ -298,6 +306,30 @@ class UrlDecodeCommand(StringEncode):
 
     def encode(self, text):
         return unquote_plus(text)
+
+
+class Base16EncodeCommand(StringEncode):
+
+    def encode(self, text):
+        return str(base64.b16encode(bytes(text, 'utf-8')), 'ascii')
+
+
+class Base16DecodeCommand(StringEncode):
+
+    def encode(self, text):
+        return str(base64.b16decode(text), 'utf-8')
+
+
+class Base32EncodeCommand(StringEncode):
+
+    def encode(self, text):
+        return str(base64.b32encode(bytes(text, 'utf-8')), 'ascii')
+
+
+class Base32DecodeCommand(StringEncode):
+
+    def encode(self, text):
+        return str(base64.b32decode(text), 'utf-8')
 
 
 class Base64EncodeCommand(StringEncode):

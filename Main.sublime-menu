@@ -64,6 +64,22 @@
                         "command": "url_decode"
                     },
                     {
+                        "caption": "Base16 Encode",
+                        "command": "base16_encode"
+                    },
+                    {
+                        "caption": "Base16 Decode",
+                        "command": "base16_decode"
+                    },
+                    {
+                        "caption": "Base32 Encode",
+                        "command": "base32_encode"
+                    },
+                    {
+                        "caption": "Base32 Decode",
+                        "command": "base32_decode"
+                    },
+                    {
                         "caption": "Base64 Encode",
                         "command": "base64_encode"
                     },
