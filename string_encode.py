@@ -21,12 +21,6 @@ quote_plus = urllib.parse.quote_plus
 unquote_plus = urllib.parse.unquote_plus
 
 
-try:
-    unichr(32)
-except NameError:
-    def unichr(val):
-        return chr(val)
-
 class StringEncodePaste(sublime_plugin.WindowCommand):
     def run(self, **kwargs):
         items = [
@@ -142,11 +136,11 @@ class HtmlDeentitizeCommand(StringEncode):
         while re.search('&#[xX][a-fA-F0-9]+;', text):
             match = re.search('&#[xX]([a-fA-F0-9]+);', text)
             text = text.replace(
-                match.group(0), unichr(int('0x' + match.group(1), 16)))
+                match.group(0), chr(int('0x' + match.group(1), 16)))
         while re.search('&#[0-9]+;', text):
             match = re.search('&#([0-9]+);', text)
             text = text.replace(
-                match.group(0), unichr(int(match.group(1), 10)))
+                match.group(0), chr(int(match.group(1), 10)))
         text = text.replace('&amp;', '&')
         return text
 
@@ -169,7 +163,7 @@ class CssUnescapeCommand(StringEncode):
         while re.search(r'\\[a-fA-F0-9]+', text):
             match = re.search(r'\\([a-fA-F0-9]+)', text)
             text = text.replace(
-                match.group(0), unichr(int('0x' + match.group(1), 16)))
+                match.group(0), chr(int('0x' + match.group(1), 16)))
         return text
 
 
@@ -203,11 +197,11 @@ class SafeHtmlDeentitizeCommand(StringEncode):
         while re.search('&#[xX][a-fA-F0-9]+;', text):
             match = re.search('&#[xX]([a-fA-F0-9]+);', text)
             text = text.replace(
-                match.group(0), unichr(int('0x' + match.group(1), 16)))
+                match.group(0), chr(int('0x' + match.group(1), 16)))
         while re.search('&#[0-9]+;', text):
             match = re.search('&#([0-9]+);', text)
             text = text.replace(
-                match.group(0), unichr(int(match.group(1), 10)))
+                match.group(0), chr(int(match.group(1), 10)))
         text = text.replace('&amp;', '&')
         return text
 
