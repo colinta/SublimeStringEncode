@@ -101,7 +101,7 @@ class StringEncode(sublime_plugin.TextCommand):
 class Gzip64EncodeCommand(StringEncode):
 
     def encode(self, text):
-        return base64.b64encode(gzip.compress(bytes(text, 'utf-8'))).decode('ascii')
+        return str(base64.b64encode(gzip.compress(bytes(text, 'utf-8'))), 'ascii')
 
 class Gzip64DecodeCommand(StringEncode):
 
@@ -279,7 +279,7 @@ class UrlDecodeCommand(StringEncode):
 class Base64EncodeCommand(StringEncode):
 
     def encode(self, text):
-        return base64.b64encode(text.encode('raw_unicode_escape')).decode('ascii')
+        return str(base64.b64encode(bytes(text, 'utf-8')), 'ascii')
 
 
 class Base64DecodeCommand(StringEncode):
