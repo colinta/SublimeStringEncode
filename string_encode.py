@@ -352,18 +352,18 @@ class Sha512EncodeCommand(StringEncode):
         return hashlib.sha512(bytes(text, 'utf-8')).hexdigest()
 
 
-class Escaper(StringEncode):
+class EscapeRegexCommand(StringEncode):
+    regex = re.compile(r'(?<!\\)([?\\*.+^$()\[\]\{\}\|])')
 
     def encode(self, text):
-        return re.sub(r'(?<!\\)(%s)' % self.meta, r'\\\1', text)
+        return self.regex.sub(r'\\\1', text)
 
 
-class EscapeRegexCommand(Escaper):
-    meta = r'[?\\*.+^$()\[\]\{\}\|]'
+class EscapeLikeCommand(StringEncode):
+    regex = re.compile(r'(?<!\\)([%_])')
 
-
-class EscapeLikeCommand(Escaper):
-    meta = r'[%_]'
+    def encode(self, text):
+        return self.regex.sub(r'\\\1', text)
 
 
 class HexDecCommand(StringEncode):
