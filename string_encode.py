@@ -52,6 +52,14 @@ __all__ = [
     "HexUnicodeCommand",
 ]
 
+def pad64(value):
+    mod = len(value) % 4
+    if mod == 3:
+        value.extend(b'=')
+    elif mod == 2:
+        value.extend(b'==')
+    return value
+
 
 class StringEncodePaste(sublime_plugin.WindowCommand):
     def run(self, **kwargs):
@@ -130,13 +138,14 @@ class StringEncode(sublime_plugin.TextCommand):
 class Gzip64EncodeCommand(StringEncode):
 
     def encode(self, text):
-        return base64.b64encode(gzip.compress(bytes(text, 'utf-8'))).decode('ascii')
+        return str(base64.b64encode(gzip.compress(bytes(text, 'utf-8'))), 'ascii')
 
 
 class Gzip64DecodeCommand(StringEncode):
 
     def encode(self, text):
-        return gzip.decompress(base64.b64decode(text.rstrip('=') + '===')).decode('utf-8')
+        value = pad64(bytearray(text, 'ascii'))
+        return str(gzip.decompress(base64.b64decode(value)), 'utf-8')
 
 
 class UnicodeEscapeCommand(StringEncode):
@@ -303,13 +312,14 @@ class UrlDecodeCommand(StringEncode):
 class Base64EncodeCommand(StringEncode):
 
     def encode(self, text):
-        return base64.b64encode(bytes(text, 'utf-8')).decode('ascii')
+        return str(base64.b64encode(bytes(text, 'utf-8')), 'ascii')
 
 
 class Base64DecodeCommand(StringEncode):
 
     def encode(self, text):
-        return base64.b64decode(text + '===').decode('utf-8')
+        value = pad64(bytearray(text, 'ascii'))
+        return str(base64.b64decode(value), 'utf-8')
 
 
 class Md5EncodeCommand(StringEncode):
