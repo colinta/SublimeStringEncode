@@ -1,13 +1,13 @@
 # coding: utf8
 import base64
+import codecs
 import gzip
-import re
-import json
 import hashlib
-import sys
+import json
+import re
 import sublime
 import sublime_plugin
-import codecs
+import sys
 
 from .stringencode.escape_table import (
     html_escape_table,
@@ -20,12 +20,36 @@ import urllib.parse
 quote_plus = urllib.parse.quote_plus
 unquote_plus = urllib.parse.unquote_plus
 
+__all__ = [
+    "StringEncodePaste",
+    "Gzip64EncodeCommand",
+    "Gzip64DecodeCommand",
+    "UnicodeEscapeCommand",
+    "HtmlEntitizeCommand",
+    "HtmlDeentitizeCommand",
+    "CssEscapeCommand",
+    "CssUnescapeCommand",
+    "SafeHtmlEntitizeCommand",
+    "SafeHtmlDeentitizeCommand",
+    "XmlEntitizeCommand",
+    "XmlDeentitizeCommand",
+    "JsonEscapeCommand",
+    "JsonUnescapeCommand",
+    "UrlEncodeCommand",
+    "UrlDecodeCommand",
+    "Base64EncodeCommand",
+    "Base64DecodeCommand",
+    "Md5EncodeCommand",
+    "Sha256EncodeCommand",
+    "Sha512EncodeCommand",
+    "EscapeRegexCommand",
+    "EscapeLikeCommand",
+    "HexDecCommand",
+    "DecHexCommand",
+    "UnicodeHexCommand",
+    "HexUnicodeCommand",
+]
 
-try:
-    unichr(32)
-except NameError:
-    def unichr(val):
-        return chr(val)
 
 class StringEncodePaste(sublime_plugin.WindowCommand):
     def run(self, **kwargs):
@@ -71,6 +95,7 @@ class StringEncodePaste(sublime_plugin.WindowCommand):
 
         self.window.show_quick_panel(lines, on_done)
 
+
 class StringEncode(sublime_plugin.TextCommand):
     def run(self, edit, **kwargs):
         regions = self.view.sel()
@@ -103,10 +128,12 @@ class Gzip64EncodeCommand(StringEncode):
     def encode(self, text):
         return base64.b64encode(gzip.compress(bytes(text, 'utf-8'))).decode('ascii')
 
+
 class Gzip64DecodeCommand(StringEncode):
 
     def encode(self, text):
         return gzip.decompress(base64.b64decode(text.rstrip('=') + '===')).decode('utf-8')
+
 
 class UnicodeEscapeCommand(StringEncode):
 
@@ -139,14 +166,14 @@ class HtmlDeentitizeCommand(StringEncode):
         for k in html5_escape_table:
             v = html5_escape_table[k]
             text = text.replace(v, k)
-        while re.search('&#[xX][a-fA-F0-9]+;', text):
-            match = re.search('&#[xX]([a-fA-F0-9]+);', text)
+        while re.search(r'&#[xX][a-fA-F0-9]+;', text):
+            match = re.search(r'&#[xX]([a-fA-F0-9]+);', text)
             text = text.replace(
-                match.group(0), unichr(int('0x' + match.group(1), 16)))
-        while re.search('&#[0-9]+;', text):
-            match = re.search('&#([0-9]+);', text)
+                match.group(0), chr(int('0x' + match.group(1), 16)))
+        while re.search(r'&#[0-9]+;', text):
+            match = re.search(r'&#([0-9]+);', text)
             text = text.replace(
-                match.group(0), unichr(int(match.group(1), 10)))
+                match.group(0), chr(int(match.group(1), 10)))
         text = text.replace('&amp;', '&')
         return text
 
@@ -169,7 +196,7 @@ class CssUnescapeCommand(StringEncode):
         while re.search(r'\\[a-fA-F0-9]+', text):
             match = re.search(r'\\([a-fA-F0-9]+)', text)
             text = text.replace(
-                match.group(0), unichr(int('0x' + match.group(1), 16)))
+                match.group(0), chr(int('0x' + match.group(1), 16)))
         return text
 
 
@@ -200,14 +227,14 @@ class SafeHtmlDeentitizeCommand(StringEncode):
                 continue
             v = html_escape_table[k]
             text = text.replace(v, k)
-        while re.search('&#[xX][a-fA-F0-9]+;', text):
-            match = re.search('&#[xX]([a-fA-F0-9]+);', text)
+        while re.search(r'&#[xX][a-fA-F0-9]+;', text):
+            match = re.search(r'&#[xX]([a-fA-F0-9]+);', text)
             text = text.replace(
-                match.group(0), unichr(int('0x' + match.group(1), 16)))
-        while re.search('&#[0-9]+;', text):
-            match = re.search('&#([0-9]+);', text)
+                match.group(0), chr(int('0x' + match.group(1), 16)))
+        while re.search(r'&#[0-9]+;', text):
+            match = re.search(r'&#([0-9]+);', text)
             text = text.replace(
-                match.group(0), unichr(int(match.group(1), 10)))
+                match.group(0), chr(int(match.group(1), 10)))
         text = text.replace('&amp;', '&')
         return text
 
