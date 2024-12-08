@@ -40,6 +40,8 @@ __all__ = [
     "Base64EncodeCommand",
     "Base64DecodeCommand",
     "Md5EncodeCommand",
+    "Sha1EncodeCommand",
+    "Sha384EncodeCommand",
     "Sha256EncodeCommand",
     "Sha512EncodeCommand",
     "EscapeRegexCommand",
