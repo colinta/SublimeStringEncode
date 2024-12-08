@@ -37,6 +37,8 @@ Or:
 Commands
 --------
 
+This list continues to grow, see [Default.sublime-commands](https://github.com/colinta/SublimeStringEncode/blob/master/Default.sublime-commands#L1) for the entire list.
+
 `string_encode_paste`: Converts the clipboard to the desired encoding.
 
 `html_entitize`: Converts characters to their HTML entity
@@ -53,15 +55,17 @@ Commands
 
 `json_unescape`: Unescapes a string (include the quotes!) according to JSON encoding.
 
-`base64_encode`: Uses base64 to encode into base64
+`base64_encode` (also `base16`, `base32`): Uses base16/32/64 to encode into base64
 
-`base64_decode`: Uses base64 to decode from base64
+`base64_decode`: Decodes from base16/32/64
+
+`gzip64_encode`: Gzip and then base64 encode
+
+`gzip64_decode`: Base64 decode and then Gunzip
 
 `md5_encode`: Uses sha package to create md5 hash
 
-`sha256_encode`: Uses sha package to create sha256 hash
-
-`sha512_encode`: Uses sha package to create sha512 hash
+`sha256_encode` (also `sha1`, `sha384`, `sha512`): Uses sha package to create sha1/256/384/512 hash
 
 `escape_regex`: Escapes regex meta characters
 
@@ -74,3 +78,4 @@ Commands
 `xml_entitize`: Converts characters to their XML entity
 
 `xml_deentitize`: Converts XML entities to a character
+
