@@ -59,9 +59,9 @@ __all__ = [
 def pad64(value):
     mod = len(value) % 4
     if mod == 3:
-        value.extend(b'=')
+        return value + '='
     elif mod == 2:
-        value.extend(b'==')
+        return value + '=='
     return value
 
 
@@ -152,8 +152,7 @@ class Gzip64EncodeCommand(StringEncode):
 class Gzip64DecodeCommand(StringEncode):
 
     def encode(self, text):
-        value = pad64(bytearray(text, 'ascii'))
-        return str(gzip.decompress(base64.b64decode(value)), 'utf-8')
+        return str(gzip.decompress(base64.b64decode(pad64(text))), 'utf-8')
 
 
 class UnicodeEscapeCommand(StringEncode):
@@ -350,8 +349,7 @@ class Base64EncodeCommand(StringEncode):
 class Base64DecodeCommand(StringEncode):
 
     def encode(self, text):
-        value = pad64(bytearray(text, 'ascii'))
-        return str(base64.b64decode(value), 'utf-8')
+        return str(base64.b64decode(pad64(text)), 'utf-8')
 
 
 class Md5EncodeCommand(StringEncode):
