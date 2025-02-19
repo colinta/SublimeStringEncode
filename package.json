@@ -3,10 +3,12 @@
   "description": "Converts characters from one encoding to another using a transformation (think HTML entities, not character encodings).",
   "author": "Colin T.A. Gray (colinta)",
   "details": "https://github.com/colinta/SublimeStringEncode",
-  "labels": ["text manipulation"],
+  "labels": [
+    "text manipulation"
+  ],
   "releases": [
     {
-      "details": "https://github.com/colinta/SublimeStringEncode/tags",
+      "tags": true,
       "sublime_text": ">=3000"
     }
   ]
