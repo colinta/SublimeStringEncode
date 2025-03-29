@@ -22,17 +22,10 @@ You can also encode the clipboard, use the `string_encode_paste` command, and yo
 Installation
 ------------
 
-1. Using Package Control, install "StringEncode"
+Using Package Control, install "StringEncode" or clone this repo in your packages folder.
 
-Or:
-
-1. Open the Sublime Text Packages folder
-    - OS X: ~/Library/Application Support/Sublime Text 3/Packages/
-    - Windows: %APPDATA%/Sublime Text 3/Packages/
-    - Linux: ~/.Sublime Text 3/Packages/ or ~/.config/sublime-text-3/Packages
-
-2. clone this repo
-3. Install keymaps for the commands (see Example.sublime-keymap for my preferred keys)
+I recommended you add key bindings for the commands. I've included my preferred bindings below.
+Copy them to your key bindings file (⌘⇧,).
 
 Commands
 --------
@@ -79,3 +72,24 @@ This list continues to grow, see [Default.sublime-commands](https://github.com/c
 
 `xml_deentitize`: Converts XML entities to a character
 
+Key Bindings
+------------
+
+Copy these to your user key bindings file.
+
+<!-- keybindings start -->
+    { "keys": ["super+shift+7"], "command": "xml_entitize", "scope": "text.xml" },
+    { "keys": ["super+ctrl+7"], "command": "xml_deentitize", "scope": "text.xml" },
+    { "keys": ["super+shift+7"], "command": "html_entitize" },
+    { "keys": ["super+ctrl+7"], "command": "html_deentitize" },
+    { "keys": ["super+shift+8"], "command": "json_escape" },
+    { "keys": ["super+ctrl+8"], "command": "json_unescape" },
+    { "keys": ["super+shift+6"], "command": "base64_encode" },
+    { "keys": ["super+ctrl+6"], "command": "base64_decode" },
+    { "keys": ["super+shift+5"], "command": "url_encode" },
+    // { "keys": ["super+shift+5"], "command": "url_encode", "args": {"old_school": true} },
+    { "keys": ["super+ctrl+5"], "command": "url_decode" },
+    { "keys": ["ctrl+shift+r"], "command": "escape_regex" },
+    { "keys": ["ctrl+shift+u"], "command": "unicode_escape" },
+    { "keys": ["super+ctrl+3"], "command": "hex_dec" },
+<!-- keybindings stop -->
