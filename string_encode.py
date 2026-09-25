@@ -158,7 +158,9 @@ class Gzip64DecodeCommand(StringEncode):
 class UnicodeEscapeCommand(StringEncode):
 
     def encode(self, text):
-        return codecs.decode(text, 'unicode-escape')
+        # the codec works on bytes: go through latin-1 so that non-ASCII
+        # characters in the text survive instead of turning into mojibake
+        return text.encode('latin-1', 'backslashreplace').decode('unicode-escape')
 
 
 class HtmlEntitizeCommand(StringEncode):
