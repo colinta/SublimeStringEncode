@@ -383,7 +383,7 @@ class Sha512EncodeCommand(StringEncode):
 
 
 class EscapeRegexCommand(StringEncode):
-    regex = re.compile(r'(?<!\\)([?\\*.+^$()\[\]\{\}\|])')
+    regex = re.compile(r'([?\\*.+^$()\[\]\{\}\|])')
 
     def encode(self, text):
         return self.regex.sub(r'\\\1', text)
