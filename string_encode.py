@@ -205,19 +205,26 @@ class CssEscapeCommand(StringEncode):
         for i, c in enumerate(text):
             if ord(c) > 127:
                 ret += hex(ord(c)).replace('0x', '\\')
+                # a hex escape ends at the first non-hex character, so terminate
+                # it with a space if the next character would be read as part of it
+                if text[i + 1:i + 2] and text[i + 1] in '0123456789abcdefABCDEF \t\n\r\f':
+                    ret += ' '
             else:
                 ret += c
         return ret
 
 
 class CssUnescapeCommand(StringEncode):
+    regex = re.compile(r'\\([a-fA-F0-9]{1,6})[ \t\n\r\f]?')
 
     def encode(self, text):
-        while re.search(r'\\[a-fA-F0-9]+', text):
-            match = re.search(r'\\([a-fA-F0-9]+)', text)
-            text = text.replace(
-                match.group(0), chr(int('0x' + match.group(1), 16)))
-        return text
+        def unescape(match):
+            code = int(match.group(1), 16)
+            if code > 0x10FFFF:
+                return match.group(0)
+            return chr(code)
+
+        return self.regex.sub(unescape, text)
 
 
 class SafeHtmlEntitizeCommand(StringEncode):
