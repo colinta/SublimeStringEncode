@@ -57,6 +57,8 @@ __all__ = [
 ]
 
 def pad64(value):
+    # b64decode ignores whitespace, so it must not count towards the padding
+    value = ''.join(value.split())
     mod = len(value) % 4
     if mod == 3:
         return value + '='
@@ -325,7 +327,7 @@ class Base16EncodeCommand(StringEncode):
 class Base16DecodeCommand(StringEncode):
 
     def encode(self, text):
-        return str(base64.b16decode(text), 'utf-8')
+        return str(base64.b16decode(text, casefold=True), 'utf-8')
 
 
 class Base32EncodeCommand(StringEncode):
@@ -337,7 +339,7 @@ class Base32EncodeCommand(StringEncode):
 class Base32DecodeCommand(StringEncode):
 
     def encode(self, text):
-        return str(base64.b32decode(text), 'utf-8')
+        return str(base64.b32decode(text, casefold=True), 'utf-8')
 
 
 class Base64EncodeCommand(StringEncode):
